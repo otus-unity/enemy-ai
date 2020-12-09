@@ -92,9 +92,14 @@ public class Character : MonoBehaviour
             if (health.value <= 0) {
                 isDead = true;
                 animator.SetBool("dead", true);
+
                 Destroy(rigidbody);
                 Destroy(collider);
                 Destroy(navMeshAgent);
+
+                var enemy = GetComponent<Enemy>();
+                if (enemy != null)
+                    Destroy(enemy);
             }
         }
 

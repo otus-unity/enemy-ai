@@ -36,4 +36,21 @@ public static class Util
         Array.Sort(raycastHits, 0, hitCount, RaycastHitComparer.instance);
         return (raycastHits, hitCount);
     }
+
+    public static T FindNearest<T>(Vector3 point, T[] objects)
+        where T : Component
+    {
+        float nearestDistance = 0.0f;
+        T nearestObject = null;
+
+        foreach (var obj in objects) {
+            float sqrDistance = (obj.transform.position - point).sqrMagnitude;
+            if (nearestObject == null || sqrDistance < nearestDistance) {
+                nearestObject = obj;
+                nearestDistance = sqrDistance;
+            }
+        }
+
+        return nearestObject;
+    }
 }
